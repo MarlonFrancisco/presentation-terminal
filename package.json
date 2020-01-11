@@ -7,10 +7,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
-    "@babel/preset-typescript": "^7.7.7",
-    "gulp-babel": "^8.0.0"
+    "@babel/preset-typescript": "^7.7.7"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
