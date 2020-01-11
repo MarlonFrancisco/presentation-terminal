@@ -67,7 +67,7 @@ class Shell {
     }
     actionsInput() {
         const formatInput = this.getValueInput().replace(/( ).*/, "");
-        const commandSelected = this.commands.find((command) => command.includes(formatInput)) || "";
+        const commandSelected = this.commands.find((command) => command === formatInput) || "";
         switch (commandSelected) {
             case "cd":
                 const folder = this.getValueInput().replace("cd ", "");
