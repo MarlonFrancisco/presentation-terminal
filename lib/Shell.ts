@@ -74,7 +74,7 @@ class Shell {
     private actionsInput(): void {
         const formatInput = this.getValueInput().replace(/( ).*/, "");
         const commandSelected =
-            this.commands.find((command) => command.includes(formatInput)) || "";
+            this.commands.find((command) => command === formatInput) || "";
 
         switch (commandSelected) {
             case "cd":
