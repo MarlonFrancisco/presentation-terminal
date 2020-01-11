@@ -1,0 +1,30 @@
+{
+  "name": "@biggy/web-page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-typescript": "^7.7.7",
+    "gulp-babel": "^8.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-webserver": "^0.9.1",
+    "html-webpack-plugin": "^3.2.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --config webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

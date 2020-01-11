@@ -1,0 +1,135 @@
+.shell {
+    width: 600px;
+    
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+    &__header {
+        background: #232323;
+        padding-left: 10px;
+        height: 30px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        display: flex;
+        justify-content: flex-start;
+    }
+    
+    &__actions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 80px;
+        
+        span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        &--close {
+            background: #e75448;
+        }
+        
+        &--minimize {
+            background: #e5c30f;
+        }
+        
+        &--maximize {
+            background: #3bb662;
+        }
+    }
+    
+    &__body {
+        background: #30353a;
+        height: 400px;
+        overflow-y: auto;
+        padding-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    &__apresentation {
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        span {
+            margin-right: 10px;
+            font-size: 18px;
+            color: #3bb662;
+        }
+    }
+    
+    &__command {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    &__error {
+        margin-top: 10px;
+        color: #fff;
+        font-weight: 600;
+    }
+    
+    &__directory {
+        color: #3bb662;
+        margin-right: 10px;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    
+    &__input {
+        margin-left: 10px;
+        flex: 1;
+        input {
+            background: transparent;
+            outline: none;
+            border: none;
+            font-weight: 600;
+            width: 100%;
+            color: #fff;
+        }
+    }
+    
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+            list-style: none;
+            font-weight: 600;
+            color: #fff;
+            width: calc(100% / 3);
+        }
+        
+        .folder {
+            color: #4db7a8;
+        }
+    }
+    
+    &__helper-list {
+        display: flex;
+        flex-direction: column;
+        font-size: 0;
+        
+        span {
+            font-size: 15px;
+            color: #e5c30f;
+        }
+        
+        li {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+        }
+    }
+    
+    &__file-content {
+        text-align: center;
+        a {
+            color: #fff;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+        "target": "es6",
+        "module": "AMD",
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true
+    }
+}
