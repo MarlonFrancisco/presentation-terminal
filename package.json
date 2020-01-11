@@ -22,7 +22,8 @@
   },
   "scripts": {
     "dev": "gulp server",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "build": "gulp compile && gulp sass && gulp files"
   },
   "keywords": [],
   "author": "",

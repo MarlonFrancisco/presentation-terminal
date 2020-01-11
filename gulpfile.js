@@ -1,7 +1,6 @@
 const { task, src, dest, parallel, watch } = require("gulp");
 const { createProject } = require("gulp-typescript");
 const sass = require("gulp-sass");
-const babel = require("gulp-babel");
 const webserver = require("gulp-webserver");
 const projectTs = createProject("./tsconfig.json");
 
