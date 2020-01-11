@@ -1,0 +1,6 @@
+{
+    "curriculum.txt": {
+        "html":  "<a href=\"#\" target=\"_blanck\">Show curriculum</a>",
+        "children": "root"
+    }
+}

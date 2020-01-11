@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css?family=Heebo&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Heebo', sans-serif; }
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: #211E3A;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.shell {
+  width: 600px; }
+  @media (max-width: 768px) {
+    .shell {
+      width: 100%; } }
+  .shell__header {
+    background: #232323;
+    padding-left: 10px;
+    height: 30px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    justify-content: flex-start; }
+  .shell__actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 80px; }
+    .shell__actions span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      cursor: pointer; }
+    .shell__actions--close {
+      background: #e75448; }
+    .shell__actions--minimize {
+      background: #e5c30f; }
+    .shell__actions--maximize {
+      background: #3bb662; }
+  .shell__body {
+    background: #30353a;
+    height: 400px;
+    overflow-y: auto;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px; }
+  .shell__apresentation {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600; }
+    .shell__apresentation span {
+      margin-right: 10px;
+      font-size: 18px;
+      color: #3bb662; }
+  .shell__command {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px; }
+  .shell__error {
+    margin-top: 10px;
+    color: #fff;
+    font-weight: 600; }
+  .shell__directory {
+    color: #3bb662;
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 15px; }
+  .shell__input {
+    margin-left: 10px;
+    flex: 1; }
+    .shell__input input {
+      background: transparent;
+      outline: none;
+      border: none;
+      font-weight: 600;
+      width: 100%;
+      color: #fff; }
+  .shell__list {
+    display: flex;
+    flex-wrap: wrap; }
+    .shell__list li {
+      list-style: none;
+      font-weight: 600;
+      color: #fff;
+      width: calc(100% / 3); }
+    .shell__list .folder {
+      color: #4db7a8; }
+  .shell__helper-list {
+    display: flex;
+    flex-direction: column;
+    font-size: 0; }
+    .shell__helper-list span {
+      font-size: 15px;
+      color: #e5c30f; }
+    .shell__helper-list li {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600; }
+  .shell__file-content {
+    text-align: center; }
+    .shell__file-content a {
+      color: #fff; }

@@ -1,0 +1,13 @@
+{
+    "root": {
+        "files": [
+            "curriculum.txt"
+        ],
+        "folders": {
+            "projects": {
+                "files": [],
+                "folders": {}
+            }
+        }
+    }
+}
