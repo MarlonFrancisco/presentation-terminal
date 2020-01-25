@@ -36,6 +36,90 @@ class Shell {
         this.onClickShell();
         this.getFilesAndFolder();
         this.getFilesContent();
+        this.historyIndex = this.getHistoryIndex();
+    }
+    getHelpers() {
+        const helpers = {
+            commands: [],
+            items: [],
+        };
+        const currentDirectory = this.getCurrentDirectory();
+        const commandSelected = this.getValueInput().replace(/( ).*/, "");
+        let valueSelected = this.getValueInput().replace(/.*( )/, "");
+        valueSelected = valueSelected === commandSelected ? "" : valueSelected;
+        helpers.commands =
+            this.commands.indexOf(commandSelected) === -1
+                ? this.commands.filter((command) => command.includes(commandSelected))
+                : [];
+        const allowCommands = ["cd", "cat"];
+        if (allowCommands.indexOf(commandSelected) === -1) {
+            return helpers;
+        }
+        helpers.items =
+            commandSelected === "cd"
+                ? Object.keys(currentDirectory.folders).filter((item) => item.includes(valueSelected))
+                : currentDirectory.files.filter((item) => item.includes(valueSelected));
+        return helpers;
+    }
+    getHistoryIndex() {
+        return this.getHistory() ? this.getHistory().length - 1 : 0;
+    }
+    getHistory() {
+        return JSON.parse(localStorage.getItem("history"));
+    }
+    setHistory(value) {
+        localStorage.setItem("history", JSON.stringify(value));
+    }
+    historyPrev() {
+        if (this.historyIndex === 0) {
+            this.shellInput.value = this.getHistory()[this.historyIndex];
+            return;
+        }
+        this.shellInput.value = this.getHistory()[this.historyIndex];
+        this.historyIndex -= 1;
+    }
+    historyNext() {
+        if (this.historyIndex === this.getHistoryIndex()) {
+            this.shellInput.value = this.getHistory()[this.historyIndex];
+            return;
+        }
+        this.historyIndex += 1;
+        this.shellInput.value = this.getHistory()[this.historyIndex];
+    }
+    setAutocomplete() {
+        const helpers = this.getHelpers();
+        const children = `
+            ${helpers.commands.length
+            ? `
+                <div>
+                    <h3>Commands</h3>
+                    <ul>
+                        ${helpers.commands
+                .map((command) => `<li>${command}</li>`)
+                .join("")}
+                    </ul>
+                </div>
+            `
+            : ""}
+
+            ${helpers.items.length
+            ? `
+                    <div>
+                        <h3>Items</h3>
+                        <ul>
+                            ${helpers.items
+                .map((item) => `<li>${item}${!item.includes(".") ? "/" : ""}</li>`)
+                .join("")}
+                        </ul>
+                    </div>
+            `
+            : ""}
+        `;
+        this.insertBlockInShell("div", "shell__autocomplete", children);
+        this.updateCommandShell(this.shellInput.value);
+    }
+    getCurrentDirectory() {
+        return this.folders[this.currentDirectory[this.currentDirectory.length - 1]];
     }
     getFilesAndFolder() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -53,9 +137,21 @@ class Shell {
         });
     }
     addListenerInputShell() {
-        this.shell.addEventListener("keydown", (event) => {
+        this.shell.addEventListener("keydown", event => {
             if (event.keyCode === 9) {
                 event.preventDefault();
+                this.setAutocomplete();
+                return;
+            }
+            if (this.getHistory()) {
+                if (event.keyCode === 38) {
+                    this.historyNext();
+                    return;
+                }
+                if (event.keyCode === 40) {
+                    this.historyPrev();
+                    return;
+                }
             }
             if (event.ctrlKey && event.key === "c") {
                 this.updateCommandShell();
@@ -67,7 +163,7 @@ class Shell {
     }
     actionsInput() {
         const formatInput = this.getValueInput().replace(/( ).*/, "");
-        const commandSelected = this.commands.find((command) => command === formatInput) || "";
+        const commandSelected = this.commands.find(command => command === formatInput) || "";
         switch (commandSelected) {
             case "cd":
                 const folder = this.getValueInput().replace("cd ", "");
@@ -135,10 +231,19 @@ class Shell {
     clearShell() {
         this.shell.innerHTML = "";
     }
-    updateCommandShell() {
+    updateCommandShell(initialValue) {
+        if (this.getValueInput().length &&
+            (this.getHistory() || []).indexOf(this.getValueInput()) === -1) {
+            this.setHistory([
+                ...(this.getHistory() || []),
+                this.getValueInput(),
+            ]);
+            this.historyIndex = this.getHistoryIndex();
+        }
         this.setAttributesInput();
         this.shell.innerHTML += this.shellCommandHtml();
         this.shellInput = document.querySelector(".shell__input input[data-disabled=false]");
+        this.shellInput.value = initialValue || "";
         this.inputFocus();
     }
     shellCommandError(message = "Error: command not recognized") {
@@ -156,7 +261,7 @@ class Shell {
         return `
             <div class="shell__command">
                 <div class="shell__directory">Marlon@Franscisco:~/${this.currentDirectory.length > 1
-            ? this.currentDirectory.join("/")
+            ? this.currentDirectory.join("/").replace("root/", "")
             : ""}$</div>
                 <div class="shell__input">
                     <input type="text" data-disabled="false"/>
@@ -171,16 +276,16 @@ class Shell {
         this.shell.appendChild(el);
     }
     listDirectorysAndArchives() {
-        const path = this.folders[this.currentDirectory[this.currentDirectory.length - 1]];
+        const path = this.getCurrentDirectory();
         this.insertBlockInShell("ul", "shell__list", `
-                    ${Object.keys(path.folders).map((folder) => `<li class="folder">${folder}</li>`)}
+                    ${Object.keys(path.folders).map(folder => `<li class="folder">${folder}</li>`)}
 
                     ${path.files.map((file) => `<li class="file">${file}</li>`)}
                 `);
     }
     listItemsHelper() {
         const children = `
-            ${this.listHelper.map((help) => `<li><span>${help.command}</span> - ${help.description}</li>`)}
+            ${this.listHelper.map(help => `<li><span>${help.command}</span> - ${help.description}</li>`)}
         `;
         this.insertBlockInShell("ul", "shell__helper-list", children);
     }
@@ -219,4 +324,3 @@ class Shell {
         });
     }
 }
-new Shell();

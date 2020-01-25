@@ -3,18 +3,27 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Heebo', sans-serif; }
+  font-family: 'Heebo', sans-serif;
+  user-select: none; }
 
 body {
   width: 100vw;
   height: 100vh;
-  background: #211E3A;
+  background: url(https://149366088.v2.pressablecdn.com/wp-content/uploads/2019/09/19.10-ermine-wallpaper.jpg);
+  background-size: cover;
+  background-position: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  padding: 20px; }
 
 .shell {
-  width: 600px; }
+  width: 600px;
+  flex: 11;
+  justify-content: center;
+  display: flex;
+  flex-direction: column; }
   @media (max-width: 768px) {
     .shell {
       width: 100%; } }
@@ -44,12 +53,19 @@ body {
     .shell__actions--maximize {
       background: #3bb662; }
   .shell__body {
-    background: #30353a;
+    background: #30353ac7;
     height: 400px;
     overflow-y: auto;
     padding-top: 20px;
     padding-left: 10px;
     padding-right: 10px; }
+    .shell__body::-webkit-scrollbar {
+      width: 9px;
+      background: #433d3d; }
+    .shell__body::-webkit-scrollbar-thumb {
+      width: 9px;
+      background: #646464;
+      border-radius: 12px; }
   .shell__apresentation {
     color: #fff;
     font-size: 15px;
@@ -72,6 +88,16 @@ body {
     margin-right: 10px;
     font-weight: 600;
     font-size: 15px; }
+  .shell__autocomplete {
+    color: #fff; }
+    .shell__autocomplete div {
+      margin-top: 10px; }
+    .shell__autocomplete h3 {
+      color: #49ae62;
+      font-size: 15px; }
+    .shell__autocomplete li {
+      display: inline-block;
+      margin-right: 15px; }
   .shell__input {
     margin-left: 10px;
     flex: 1; }
@@ -108,3 +134,9 @@ body {
     text-align: center; }
     .shell__file-content a {
       color: #fff; }
+
+footer {
+  flex: 1;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500; }
